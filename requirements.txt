@@ -1,0 +1,15 @@
+bidict==0.21.2
+click==6.7
+Flask==0.12.2
+Flask-SocketIO==5.0.1
+Flask-SQLAlchemy==2.3.2
+Flask-WTF==0.14.2
+itsdangerous==0.24
+Jinja2==2.10
+MarkupSafe==1.0
+PyMySQL==0.8.0
+python-engineio==4.0.0
+python-socketio==5.0.3
+SQLAlchemy==1.2.6
+Werkzeug==0.14.1
+WTForms==2.1

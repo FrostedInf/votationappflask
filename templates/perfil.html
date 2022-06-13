@@ -1,0 +1,94 @@
+{% extends 'plantillas/perfilPlantilla.html' %}
+{% from 'plantillas/_macroForms.html' import render_fields %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="col-md-4 col-xs-12">
+        <div class="portlet light profile-sidebar-portlet bordered">
+            <div class="profile-userpic">
+                <img src="{{url_for('static', filename='img/nav_bar_logo/user.png')}}" class="img-responsive" alt="">
+              </div>
+            <div class="profile-usertitle">
+              <br></br>
+              <div class="profile-usertitle-job">Nombre de Usuario: </div>
+                <div class="center-block" class="profile-usertitle-name"> <h4>{{user.username}}</h4> </div>
+                
+                <div class="profile-usertitle-job">Correo Electronico: </div>
+                <div class="center-block" class="profile-usertitle-name"> <h4>{{user.email}}</h4> </div>
+                
+            </div>
+                     <div class="profile-usermenu" >
+                <ul class="nav">
+                    <li class="active">
+                       
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-xs-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+                <div class="caption caption-md">
+                    <i class="icon-globe theme-font hide"></i>
+                    <h1>Mis Encuestas</h1>
+                    <div class="col-centered col-md-8">
+                        <form method="POST" class="form">
+                            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                            <div class="row">
+                                <div class="form-group col-xs-12">
+                                    {{render_fields(formPregunta.textoPregunta, class='form-control')}}
+                                </div>
+                            </div>                                                        
+                            <button type="submit" class="btn btn-default">Crear encuesta</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="container-fluid">
+                    <h2>Lista de encuestas</h2>
+                </div>
+            </div>
+            <div class="container-fluid">      
+                {%for pregunta in preguntas%}              
+                <div class="row">
+                    <div class="col-md-8" style="border: 1px solid black; border-radius: 5px; padding-top: 5px; padding-bottom: 5px; margin-bottom: 5px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">Nombre de pregunta: {{pregunta.texto_pregunta}}</p>
+                                <p class="card-text">Nombre de usuario: {{pregunta.username}}</p>
+                                <div>
+                                    <a href="/respuestas/{{pregunta.id}}" class="btn btn-primary"> Agregar respuesta</a>
+                                    <a href="/resultados/{{pregunta.id}}" class="btn btn-primary"> Ver Resultados</a>
+                                </div>
+                                
+                                <div class="input-group ">
+                                    <input type="text" class="form-control link-resultados" placeholder="Recipient's username" id="{{pregunta.id}}" value="http://localhost:5000/resultados/{{pregunta.id}}"
+                                        aria-describedby="basic-addon2" readonly>
+                                      <button class="btn btn-link" type="button" id="{{pregunta.id}}" onclick="copiar(this)" >copiar liga</button>                                    
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>                      
+                {% endfor %}
+            </div>
+        </div>
+</div>
+ <script>
+
+    function copiar(boton){
+        console.log(boton.id)
+        var copytext = document.getElementById(boton.id);
+    
+        copytext.select();
+
+        console.log(copytext.value)
+        document.execCommand("copy");
+    }
+     
+
+ </script>
+    
+     {% endblock %}

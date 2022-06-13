@@ -1,0 +1,11 @@
+# Class and stuff from python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Macos stuff:
+.DS_Store
