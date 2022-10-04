@@ -1,4 +1,4 @@
-# book-store
+# Votation App
 
 ## Install Requirements
 
